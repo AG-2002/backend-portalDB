@@ -1,7 +1,7 @@
 const {Admin}  = require("../models/adminSchema.js");
 
 exports.createAdmin = async (data) => {
-  const admin  = new Admin(data);
+  const admin = new Admin(data);
   await admin.save();
  return admin;
 }
