@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { Unauthorized } = require("http-errors");
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 const adminSchema = new Schema({
     name: {
@@ -20,6 +20,7 @@ const adminSchema = new Schema({
          required: true
     }
 });
+
 
 adminSchema.statics.findByCredential = async function ({username,password}) {
     const admin = await Admin.findOne({username});

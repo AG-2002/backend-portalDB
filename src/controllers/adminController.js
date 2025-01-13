@@ -2,7 +2,7 @@ const { getAdmin, createAdmin } = require("../services/adminService.js");
 
 exports.createAdmin = async (req, res) => {
   const data = req.body;
-  const result = await createAdmin(data);
+  await createAdmin(data);
   res.status(201).send("created sucessfully");
 };
 
