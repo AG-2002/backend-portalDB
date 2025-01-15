@@ -13,6 +13,7 @@ exports.loginAdmin = async (req, res) => {
   const token = admin.generateToken();
 
   res.cookie("token", token, {
+    withCredentials: true,
     httpOnly: true,
     sameSite: "None",
     secure: true,
