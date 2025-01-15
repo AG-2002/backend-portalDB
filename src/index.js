@@ -13,24 +13,6 @@ const employeeRoute = require("./routes/employeeRoute.js");
 
 const app = express();
 
-const allowlist = [process.env.FRONTEND_PROD_URL, process.env.FRONTEND_DEV_URL];
-
-const corsOptionsDelegate = function (req, callback) {
-  let corsOptions;
-  const origin = req.header("Origin");
-  if (allowlist.includes(origin) || !origin) {
-    corsOptions = {
-      origin: origin,
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      allowedHeaders: ["Content-Type", "Authorization", "X-Custom-Header"],
-      credentials: true,
-    };
-  } else {
-    corsOptions = { origin: false };
-  }
-  callback(null, corsOptions);
-};
-
 process.on("uncaughtException", (ex) => {
   winston.error(ex.message, ex);
   process.exit(1);
@@ -47,8 +29,7 @@ process.on("unhandledRejection", (ex) => {
 winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
-app.use(cors(corsOptionsDelegate));
-app.options('*', cors(corsOptionsDelegate));
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/admin", adminRoute);
