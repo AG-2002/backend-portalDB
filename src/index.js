@@ -48,6 +48,7 @@ winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
 app.use(cors(corsOptionsDelegate));
+app.options('*', cors(corsOptionsDelegate));
 app.use(express.json());
 
 app.use("/api/admin", adminRoute);
