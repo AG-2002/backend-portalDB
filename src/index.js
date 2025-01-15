@@ -29,12 +29,7 @@ process.on("unhandledRejection", (ex) => {
 winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND_PROD_URL,
-    credentials: true,
-  })
-);
+app.use(cors({origin: process.env.FRONTEND_PROD_URL,credentials: true,}));
 app.use(express.json());
 
 app.use("/api/admin", adminRoute);
