@@ -47,7 +47,6 @@ process.on("unhandledRejection", (ex) => {
 winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
-app.options('*', cors(corsOptionsDelegate));
 app.use(cors(corsOptionsDelegate));
 app.use(express.json());
 
