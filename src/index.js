@@ -8,7 +8,21 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 
-const baseURL = process.env.FRONTEND_URL||"http://localhost:5173"
+const allowlist = [process.env.FRONTEND_PROD_URL,process.env.FRONTEND_DEV_URL];
+
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (allowlist.indexOf(req.header('Origin')) !== -1 || !req.header('Origin')) {
+    corsOptions = { origin: true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'], 
+    }
+  } else {
+    corsOptions = { origin: false } 
+  }
+  callback(null, corsOptions);
+  
+};
 
 
 process.on("uncaughtException", (ex) => {
@@ -35,7 +49,7 @@ const employeeRoute = require("./routes/employeeRoute.js");
 
 app.use(express.json());
 
-app.use(cors({ origin: baseURL, credentials: true }));
+app.use(cors({ corsOptionsDelegate, credentials: true }));
 
 app.use("/api/admin", adminRoute);
 
