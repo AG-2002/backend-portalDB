@@ -48,10 +48,17 @@ winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
 app.use(express.json());
+app.options('*', cors(corsOptionsDelegate));
 app.use(cors(corsOptionsDelegate));
 
 app.use("/api/admin", adminRoute);
 app.use("/api/employee", employeeRoute);
+
+// In your backend
+app.get("/test", (req, res) => {
+  res.send("CORS is working");
+});
+
 
 app.get("/", (req, res) => res.send("Home"));
 
