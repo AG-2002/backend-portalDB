@@ -13,9 +13,11 @@ const allowlist = [process.env.FRONTEND_PROD_URL,process.env.FRONTEND_DEV_URL];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1 || !req.header('Origin')) {
-    corsOptions = { origin: true,
+    corsOptions = { 
+      origin: req.header('Origin'),
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'], 
+      credentials: true,
     }
   } else {
     corsOptions = { origin: false } 
@@ -49,7 +51,7 @@ const employeeRoute = require("./routes/employeeRoute.js");
 
 app.use(express.json());
 
-app.use(cors({ corsOptionsDelegate, credentials: true }));
+app.use(cors(corsOptionsDelegate));
 
 app.use("/api/admin", adminRoute);
 
