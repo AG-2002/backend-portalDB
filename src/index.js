@@ -41,7 +41,7 @@ app.use("/api/employee", employeeRoute);
 
 app.use(error);
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Home"));
 
 app.listen(process.env.PORT, () => {
   console.log("listening at 8080");
