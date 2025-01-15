@@ -8,6 +8,8 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 
+const baseURL = process.env.FRONTEND_URL||"http://localhost:5173"
+
 
 process.on("uncaughtException", (ex) => {
   winston.error(ex.message, ex);
@@ -33,7 +35,7 @@ const employeeRoute = require("./routes/employeeRoute.js");
 
 app.use(express.json());
 
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: baseURL, credentials: true }));
 
 app.use("/api/admin", adminRoute);
 
