@@ -16,5 +16,6 @@ module.exports = (err, req, res, next) => {
   }
 
   winston.error(err.message, err);
+  console.error(err.message, err);
   return res.status(501).send("Somthing failed");
 };
