@@ -37,16 +37,14 @@ winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 app.use(express.json());
 app.use(
   cors({
-    origin: [process.env.FRONTEND_PROD_URL],
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
   })
 );
 
 app.get("/", (req, res) => {
   res.send("Home Page");
-}
-
-);
+});
 
 app.use("/api/admin", adminRoute);
 app.use("/api/employee", employeeRoute);
