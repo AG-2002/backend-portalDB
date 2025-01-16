@@ -13,8 +13,6 @@ const employeeRoute = require("./routes/employeeRoute.js");
 
 const app = express();
 
-const allowedOrigins = [process.env.FRONTEND_PROD_URL, process.env.FRONTEND_DEV_URL];
-
 process.on("uncaughtException", (ex) => {
   winston.error(ex.message, ex);
   process.exit(1);
@@ -36,27 +34,19 @@ process.on("unhandledRejection", (ex) => {
 winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
+app.use(express.json());
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // If `origin` is in the allowed list or is undefined (e.g., non-browser requests)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, origin); // Set the origin dynamically
-      } else {
-        callback(new Error("Not allowed by CORS")); // Reject the request
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin:[process.env.FRONTEND_PROD_URL],
+    credentials:true,
   })
 );
-app.use(express.json());
+
+app.get("/", (req, res) => res.send("Home Page"));
 
 app.use("/api/admin", adminRoute);
 app.use("/api/employee", employeeRoute);
 
-app.get("/", (req, res) => res.send("Home"));
 
 app.use(error);
 
