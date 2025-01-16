@@ -43,6 +43,8 @@ app.use(
 );
 
 app.get("/", (req, res) => res.send("Home Page"));
+app.get("/api", (req, res) => res.send("api Page"));
+app.get("/api/admin", (req, res) => res.send("admin Page"));
 
 app.use("/api/admin", adminRoute);
 app.use("/api/employee", employeeRoute);
