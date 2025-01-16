@@ -42,9 +42,8 @@ app.use(
   })
 );
 
-app.get("/", (req, res, next) => {
+app.get("/", (req, res) => {
   res.send("Home Page");
-  next();
 }
 
 );
