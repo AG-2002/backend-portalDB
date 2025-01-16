@@ -22,6 +22,5 @@ exports.loginAdmin = async (req, res) => {
 
 exports.getAdminInfo = async (req, res) => {
   const adminData = req.admin;
-  console.log("yes");
   res.status(200).send(adminData);
 };

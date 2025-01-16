@@ -42,14 +42,17 @@ app.use(
   })
 );
 
+app.get("/", (req, res, next) => {
+  res.send("Home Page");
+  next();
+}
+
+);
 
 app.use("/api/admin", adminRoute);
 app.use("/api/employee", employeeRoute);
 
 app.use(error);
-
-app.get("/", (req, res) => res.send("Home Page"));
-app.get("/api", (req, res) => res.send("api Page"));
 
 app.listen(process.env.PORT, () => {
   console.log("listening at 8080");
