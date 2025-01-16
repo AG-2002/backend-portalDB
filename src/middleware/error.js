@@ -3,6 +3,9 @@ const winston = require("winston");
 
 module.exports = (err, req, res, next) => {
   if (err instanceof HttpError) {
+    console.log(res
+      .status(err.status)
+      .send({ name: err.name, message: err.message }));
     return res
       .status(err.status)
       .send({ name: err.name, message: err.message });

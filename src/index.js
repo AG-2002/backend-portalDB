@@ -7,9 +7,9 @@ const cors = require("cors");
 
 require("./database/db.js");
 require("winston-mongodb");
-const error = require("./middleware/error.js");
 const adminRoute = require("./routes/adminRoute.js");
 const employeeRoute = require("./routes/employeeRoute.js");
+const error = require("./middleware/error.js");
 
 const app = express();
 
@@ -46,7 +46,6 @@ app.get("/", (req, res) => res.send("Home Page"));
 
 app.use("/api/admin", adminRoute);
 app.use("/api/employee", employeeRoute);
-
 
 app.use(error);
 
