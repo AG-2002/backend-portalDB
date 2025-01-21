@@ -5,6 +5,7 @@ const {
   loginAdmin,
   createAdmin,
   getAdminInfo,
+  logout
 } = require("../controllers/adminController.js");
 const hashPassword = require('../middleware/hashPassword.js');
 const auth = require("../middleware/auth.js");
