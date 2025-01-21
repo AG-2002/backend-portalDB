@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const express = require("express");
 const winston = require("winston");
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const cors = require("cors");
 
 require("./database/db.js");
@@ -36,7 +36,7 @@ winston.add(new winston.transports.File({ filename: "logfile.log" }));
 winston.add(new winston.transports.MongoDB({ db: process.env.DB_URL }));
 
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
