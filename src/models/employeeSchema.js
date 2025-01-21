@@ -27,13 +27,13 @@ const employeeSchema = new Schema(
       enum: ["HR", "Manager", "Sales", "Other"],
     },
     gender: {
-      type:String,
-      enum: ['Male','Female'],
+      type: String,
+      enum: ["Male", "Female"],
       required: true,
     },
     course: {
       type: String,
-      enum: ['MCA','BCA','BSC'],
+      enum: ["MCA", "BCA", "BSC"],
       required: true,
     },
     url: {
@@ -46,6 +46,6 @@ const employeeSchema = new Schema(
   }
 );
 
-const Employee = mongoose.model('Employee', employeeSchema);
+const Employee = mongoose.model("Employee", employeeSchema);
 
 module.exports = Employee;
