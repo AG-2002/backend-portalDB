@@ -11,19 +11,24 @@ exports.addEmployee = async (req, res) => {
     return res.status(400).send({ error: "No file uploaded" });
   }
   const result = await createEmployee(empData);
-  console.log(result);
-  res.status(201).send({ message: "employee add successfully" });
+  if(result){
+  res.status(201).send();
+  }
+  
 };
 
 exports.getAllEmployees = async (req, res) => {
   const employeeList = await fetchAllEmployees(req.body);
-  res.status(200).send({ message: "data fetch successfully", employeeList });
+  res.status(200).send({ employeeList });
 };
 
 exports.updateEmployee = async (req, res) => {
   const { id } = req.params;
  const updatedEmployee = await updateEmployee({ id, updateData:req.body });
-  res.status(200).send({ message: "updated successfully",updatedEmployee});
+ if(updatedEmployee){
+  res.status(200).send();
+ }
+  
 };
 
 exports.deleteEmployee = async (req,res) => {

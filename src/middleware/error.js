@@ -2,6 +2,10 @@ const { HttpError } = require("http-errors");
 const winston = require("winston");
 
 module.exports = (err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  
   if (err instanceof HttpError) {
     return res
       .status(err.status)
