@@ -13,7 +13,7 @@ const auth = require("../middleware/auth.js");
 router.post("/signup", hashPassword,createAdmin);
 router.post("/login", loginAdmin);
 router.get("/profile",auth,getAdminInfo);
-router.post('/logout',logout)
+router.post('/logout',logout);
 
 module.exports = router;
 

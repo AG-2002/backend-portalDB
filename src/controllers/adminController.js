@@ -2,8 +2,10 @@ const { getAdmin, createAdmin } = require("../services/adminService.js");
 
 exports.createAdmin = async (req, res) => {
   const data = req.body;
-  await createAdmin(data);
+ const response = await createAdmin(data);
+ if(response){
   res.status(201).send("created sucessfully");
+ }
 };
 
 exports.loginAdmin = async (req, res) => {
@@ -26,10 +28,11 @@ exports.getAdminInfo = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-  res.cookie("token", token, {
-    httpOnly: true,
-    sameSite: "none",
-    secure: true,
+  const token = req.header("Cookie")?.replace("token=", "");
+  res.clearCookie('token', {
+    httpOnly: true, 
+    secure: true,  
+    sameSite: 'none',
   });
   res.status(204).send();
 };
