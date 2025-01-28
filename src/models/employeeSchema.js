@@ -38,7 +38,6 @@ const employeeSchema = new Schema(
     },
     url: {
       type: String,
-      required: false,
     },
   },
   {
