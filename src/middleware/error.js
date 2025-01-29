@@ -18,6 +18,7 @@ module.exports = (err, req, res, next) => {
   }
 
   winston.error(err.message, err);
+  console.log(err);
   
   return res.status(501).send('Something failed on the server. Please try again later.');
 };

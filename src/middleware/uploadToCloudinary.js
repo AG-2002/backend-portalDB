@@ -2,10 +2,8 @@ const sharp = require("sharp");
 const handleUpload = require("../config/cloudinary-config");
 
 async function uploadToCloudinary(req, res, next) {
-  if (!req.file) {
-    return res.status(400).send({ message: "No image file provided" });
-  }
-  
+  if (!req.file)  return next();
+
   // Resize image using sharp
   const resizedBuffer = await sharp(req.file.buffer) // Input the raw buffer
     .resize({ width: 800 }) // Resize to a width of 800px (adjust as needed)
@@ -18,7 +16,7 @@ async function uploadToCloudinary(req, res, next) {
   const cldRes = await handleUpload(dataURI);
 
   req.body.url = cldRes.secure_url;
-  
+
   next();
 }
 
